@@ -6,6 +6,7 @@ import CounterApp from './counter/CounterApp'
 import ErrorPage from './pages/404'
 import LoginPage from './pages/LoginPage'
 import ProductCard from './pages/ProductCard'
+import Products from './pages/Products'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path:'/product',
     element:<ProductCard/>
+  },
+  {
+    path:'/products',
+    element:<Products/>
   }
 ]);
 createRoot(document.getElementById('root')).render(

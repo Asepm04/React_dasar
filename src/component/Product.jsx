@@ -28,9 +28,12 @@ const Body = (props) =>
 
 const Footer = (props) =>
 {
-    const {price} = props;
+    const {price,onClick} = props;
     return (
-        <h3>{price}</h3>
+       <div>
+         <h3>{price}</h3>
+         <button onClick={onClick}> Add to cart</button>
+       </div>
     )
 }
 
