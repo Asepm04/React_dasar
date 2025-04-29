@@ -1,45 +1,57 @@
 import Product from '../component/Product'
 import {useState,useEffect} from 'react'
+import { getProduct } from '../services/product.service';
 
 
 const Products = () =>
 {
-    const data = 
-    [
-        {
-            id:1,
-            title:"sepatu baru",
-            body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
-                    amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
-                    praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
-            price : 1000000
-        },
-        {
-            id:2,
-            title :"sepatu lama",
-            body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
-                    amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
-                    praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
-            price : 2000000
-        },
-        {
-            id:3,
-            title: "sepatu bekas",
-            body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
-                    amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
-                    praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
-            price : 3000000
-        }
-    ];
+    // const data = 
+    // [
+    //     {
+    //         id:1,
+    //         title:"sepatu baru",
+    //         body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
+    //                 amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
+    //                 praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
+    //         price : 1000000
+    //     },
+    //     {
+    //         id:2,
+    //         title :"sepatu lama",
+    //         body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
+    //                 amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
+    //                 praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
+    //         price : 2000000
+    //     },
+    //     {
+    //         id:3,
+    //         title: "sepatu bekas",
+    //         body : `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus animi deserunt, 
+    //                 amet aspernatur magni itaque a placeat dolores odio quae voluptatem 
+    //                 praesentium quam eos sint eius illum repudiandae, enim doloremque!`,
+    //         price : 3000000
+    //     }
+    // ];
 
 
     const [cart,setCart] = useState([]);
     const [totalPrice,setTotalPrice] = useState(0);
+    const [data,setData] = useState([]);
 
     useEffect( ()=>
         {
             setCart(JSON.parse(localStorage.getItem("cart")) || []);
         },[]);
+
+    useEffect(()=>
+    {
+        getProduct(data=>
+        {
+            console.log(data);
+            setData(data);
+        }
+        );
+    });
 
     const handleClick = (id) =>
     {
@@ -66,8 +78,8 @@ const Products = () =>
 
 
     useEffect(()=>
-    {
-      if(cart.length > 0)
+    { 
+      if(cart.length > 0 && data.length > 0)
       {
         const sum =  cart.reduce((acc,item) => 
             {
@@ -79,13 +91,13 @@ const Products = () =>
             localStorage.setItem("cart",JSON.stringify(cart));
       }
 
-    },[cart]);
+    },[cart,data]);
 
 
     return (
         <div>
         <Product>
-            {
+            { data.length > 0 &&
                 data.map(item =>
                 
                     <div key={item.id}>
@@ -93,6 +105,7 @@ const Products = () =>
                         <Product.Body >
                             <p>
                                 {item.body}
+                                {/* <img src={item.image} alt="" /> */}
                             </p>
                         </Product.Body>
                         <Product.Footer  price={item.price.toLocaleString("id-ID",{styles:"currency",currency:"IDR"})} onClick={()=>{handleClick(item.id)}}/>
@@ -112,7 +125,7 @@ const Products = () =>
                 </tr>
             </thead>
             <tbody>
-            {cart.map(items=>
+            {data.length > 0 && cart.map(items=>
                 {
                     const product = data.find(item=> item.id === items.id)
                     return (
