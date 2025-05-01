@@ -1,6 +1,8 @@
 import Product from '../component/Product'
 import {useState,useEffect} from 'react'
-import { getProduct } from '../services/product.service';
+import { getProduct } from '../services/product.service'
+import {jwtDecode} from 'jwt-decode'
+import { getUsername } from '../services/auth.service'
 
 
 const Products = () =>
@@ -37,10 +39,12 @@ const Products = () =>
     const [cart,setCart] = useState([]);
     const [totalPrice,setTotalPrice] = useState(0);
     const [data,setData] = useState([]);
+    const [user,setUser] = useState("");
 
     useEffect( ()=>
         {
             setCart(JSON.parse(localStorage.getItem("cart")) || []);
+            setUser(getUsername());
         },[]);
 
     useEffect(()=>
@@ -93,9 +97,12 @@ const Products = () =>
 
     },[cart,data]);
 
+    
+
 
     return (
         <div>
+            <h1>{user}</h1>
         <Product>
             { data.length > 0 &&
                 data.map(item =>
