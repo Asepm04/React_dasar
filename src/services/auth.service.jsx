@@ -27,6 +27,6 @@ export const getUsername = () =>
         }
         else
         {
-            console.log("error")
+            windows.location.href="/login";
         }
 }
