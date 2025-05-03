@@ -7,6 +7,7 @@ import ErrorPage from './pages/404'
 import LoginPage from './pages/LoginPage'
 import ProductCard from './pages/ProductCard'
 import Products from './pages/Products'
+import Detail from './pages/detailProduct'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     path:'/products',
     element:<Products/>
   },
+  {
+    path:'/products/:id',
+    element:<Detail/>
+  }
   
 ]);
 createRoot(document.getElementById('root')).render(

@@ -1,3 +1,5 @@
+import {Link}  from 'react-router-dom'
+
 const Product = (props) =>
 {
     const {children} = props;
@@ -28,11 +30,11 @@ const Body = (props) =>
 
 const Footer = (props) =>
 {
-    const {price,onClick} = props;
+    const {price,onClick,id} = props;
     return (
        <div>
          <h3>{price}</h3>
-         <button onClick={onClick}> Add to cart</button>
+         <button onClick={onClick} > <Link  to={id} >add to cart</Link></button>
        </div>
     )
 }

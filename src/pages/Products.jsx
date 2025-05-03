@@ -112,7 +112,7 @@ const Products = () =>
                                 {/* <img src={item.image} alt="" /> */}
                             </p>
                         </Product.Body>
-                        <Product.Footer  price={item.price.toLocaleString("id-ID",{styles:"currency",currency:"IDR"})} onClick={()=>{handleClick(item.id)}}/>
+                        <Product.Footer id={"/products/"+item.id}  price={item.price.toLocaleString("id-ID",{styles:"currency",currency:"IDR"})} onClick={()=>{handleClick(item.id)}}/>
                     </div>
                 
                 )
