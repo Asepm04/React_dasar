@@ -17,16 +17,16 @@ export const Login = (data,callback) =>
     
 }
 
-export const getUsername = () =>
-{
-       const token = localStorage.getItem('token');
-        if(token)
-        {
-            const decoded = jwtDecode(token);
-            return  decoded.user;
-        }
-        else
-        {
-            windows.location.href="/login";
-        }
-}
+// export const getUsername = () =>
+// {
+//        const token = localStorage.getItem('token');
+//         if(token)
+//         {
+//             const decoded = jwtDecode(token);
+//             return  decoded.user;
+//         }
+//         else
+//         {
+//             windows.location.href="/login";
+//         }
+// }

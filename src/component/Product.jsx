@@ -32,9 +32,9 @@ const Footer = (props) =>
 {
     const {price,onClick,id} = props;
     return (
-       <div>
-         <h3>{price}</h3>
-         <button onClick={onClick} > <Link  to={id} >add to cart</Link></button>
+        <div>
+            <Link  to={id} ><h3>{price}</h3></Link>
+         <button onClick={onClick} >add to cart</button>
        </div>
     )
 }
